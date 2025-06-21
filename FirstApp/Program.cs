@@ -35,7 +35,8 @@ public class Program
             Console.WriteLine("1 - view ToDo List");
             Console.WriteLine("2 - add to ToDo list");
             Console.WriteLine("3 - remove from ToDo list");
-
+            Console.WriteLine("4 - mark task as complete");
+            Console.WriteLine("5 - edit task");
 
 
             string userInput = Console.ReadLine(); // wait for user input
@@ -51,9 +52,9 @@ public class Program
           
 
 
-            if (option == false)
+            if (optionId < 0 || optionId > 5) // Updated the range check
             {
-                Console.WriteLine("Please type correct number. The range is (0-3). \n");
+                Console.WriteLine("Please type correct number. The range is (0-5). \n");
 
                 continue; 
             }
@@ -68,32 +69,25 @@ public class Program
 
             if (optionId == 1)
             {
-                foreach (string item in todoListItems) // write to console every part from ToDoList Items 
+                if (todoListItems.Count == 0)
                 {
-                Console.WriteLine(item);
+                    Console.WriteLine("ToDo list is empty.");
                 }
-
-
-
-                /* 
-                   for (int i = 0; i < todoListItems.Count; i++)
+                else
                 {
-                    string item = todoListItems[i];
-                    Console.WriteLine(item);
-
+                    for (int i = 0; i < todoListItems.Count; i++)
+                    {
+                        Console.WriteLine($"{i}: {todoListItems[i]}");
+                    }
                 }
-                 
-                */
-
-            
             }
 
             if (optionId == 2)
             {
-
+                Console.WriteLine("Enter new task:");
                 string newToDoList = Console.ReadLine(); // wait for user input 
                 
-               if (newToDoList != "")
+               if (!string.IsNullOrWhiteSpace(newToDoList))
                 {
 
                     todoListItems.Add(newToDoList);
@@ -103,17 +97,23 @@ public class Program
                 else
                 {
 
-                    Console.WriteLine("Item was not added. \n");
+                    Console.WriteLine("Item was not added. Task cannot be empty. \n");
                      
                 }
-                    
-            
-
             }
 
             if (optionId == 3) // removing items 
             {
-                Console.WriteLine("Please type a item what you want to remove:");
+                if (todoListItems.Count == 0)
+                {
+                    Console.WriteLine("ToDo list is empty. Nothing to remove.");
+                    continue;
+                }
+                Console.WriteLine("Please type the index of the item you want to remove:");
+                 for (int i = 0; i < todoListItems.Count; i++)
+                {
+                    Console.WriteLine($"{i}: {todoListItems[i]}");
+                }
 
                 string userInputForRemoveIndex = Console.ReadLine();
                 int removeIndex;
@@ -134,21 +134,93 @@ public class Program
                 }
 
                 todoListItems.RemoveAt(removeIndex);
+                Console.WriteLine("Item was successfully removed. \n");
 
             }
             
+            if (optionId == 4) // Mark task as complete
+            {
+                if (todoListItems.Count == 0)
+                {
+                    Console.WriteLine("ToDo list is empty. Nothing to mark as complete.");
+                    continue;
+                }
+                Console.WriteLine("Please type the index of the item you want to mark as complete:");
+                for (int i = 0; i < todoListItems.Count; i++)
+                {
+                    Console.WriteLine($"{i}: {todoListItems[i]}");
+                }
 
+                string userInputForCompleteIndex = Console.ReadLine();
+                int completeIndex;
+                bool completeIndexParseResult = int.TryParse(userInputForCompleteIndex, out completeIndex);
 
-            
+                if (completeIndexParseResult == false)
+                {
+                    Console.WriteLine("Input was not an integer!");
+                    continue;
+                }
 
+                if (completeIndex < 0 || completeIndex >= todoListItems.Count)
+                {
+                    Console.WriteLine("Input must be non-negative and less than the size of the collection!");
+                    continue;
+                }
 
+                if (todoListItems[completeIndex].EndsWith("[DONE]"))
+                {
+                    Console.WriteLine("Task is already marked as complete.");
+                }
+                else
+                {
+                    todoListItems[completeIndex] = todoListItems[completeIndex] + " [DONE]";
+                    Console.WriteLine("Task marked as complete. \n");
+                }
+            }
+
+            if (optionId == 5) // Edit task
+            {
+                if (todoListItems.Count == 0)
+                {
+                    Console.WriteLine("ToDo list is empty. Nothing to edit.");
+                    continue;
+                }
+                Console.WriteLine("Please type the index of the item you want to edit:");
+                for (int i = 0; i < todoListItems.Count; i++)
+                {
+                    Console.WriteLine($"{i}: {todoListItems[i]}");
+                }
+
+                string userInputForEditIndex = Console.ReadLine();
+                int editIndex;
+                bool editIndexParseResult = int.TryParse(userInputForEditIndex, out editIndex);
+
+                if (editIndexParseResult == false)
+                {
+                    Console.WriteLine("Input was not an integer!");
+                    continue;
+                }
+
+                if (editIndex < 0 || editIndex >= todoListItems.Count)
+                {
+                    Console.WriteLine("Input must be non-negative and less than the size of the collection!");
+                    continue;
+                }
+
+                Console.WriteLine($"Editing task: {todoListItems[editIndex]}");
+                Console.WriteLine("Enter the new task description:");
+                string newTaskDescription = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(newTaskDescription))
+                {
+                    todoListItems[editIndex] = newTaskDescription;
+                    Console.WriteLine("Task successfully updated. \n");
+                }
+                else
+                {
+                    Console.WriteLine("Task not updated. New description cannot be empty. \n");
+                }
+            }
         }
-
-
     }
-
-
-
-
-
 }

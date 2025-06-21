@@ -8,11 +8,11 @@ Tento projekt představuje minimalistický ToDo List, který umožňuje uživate
 ## ✨ Funkce
 
 - ➕ **Přidávání úkolů** - Rychlé vytváření nových položek
-- ✅ **Označování dokončených úkolů** - Sledování pokroku  
-- 🗑️ **Mazání úkolů** - Odstranění nepotřebných položek
-- 📝 **Editace úkolů** - Úprava existujících záznamů
 - 📄 **Zobrazení všech úkolů** - Přehledný výpis všech položek
-- 💾 **Trvalé ukládání** - Úkoly se zachovají i po zavření aplikace
+- 🗑️ **Mazání úkolů** - Odstranění nepotřebných položek
+- ✅ **Označování dokončených úkolů** - Sledování pokroku
+- 📝 **Editace úkolů** - Úprava existujících záznamů
+- 💾 **Trvalé ukládání** - Úkoly se zachovají i po zavření aplikace (plánováno)
 
 
 
@@ -20,11 +20,12 @@ Tento projekt představuje minimalistický ToDo List, který umožňuje uživate
 
 Po spuštění aplikace se zobrazí hlavní menu s možnostmi:
 
-1. **Zobrazit všechny úkoly** - Vypíše seznam všech úkolů
-2. **Přidat nový úkol** - Umožní zadat název nového úkolu
-3. **Označit úkol jako dokončený** - Označí vybraný úkol jako hotový
-4. **Smazat úkol** - Odstraní vybraný úkol ze seznamu
-5. **Ukončit** - Zavře aplikaci
+1. **Zobrazit všechny úkoly** - Vypíše seznam všech úkolů s jejich číselnými indexy.
+2. **Přidat nový úkol** - Umožní zadat název nového úkolu.
+3. **Smazat úkol** - Odstraní vybraný úkol ze seznamu na základě jeho indexu.
+4. **Označit úkol jako dokončený** - Označí vybraný úkol jako hotový přidáním "[DONE]" na konec textu úkolu.
+5. **Editovat úkol** - Umožní upravit text existujícího úkolu na základě jeho indexu.
+6. **Ukončit** - Zavře aplikaci.
 
 ## 🎯 Budoucí vylepšení
 
